@@ -9,7 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@line/liff": "^2.16.0",
+    "@line/liff": "^2.20.3",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7"
   },
