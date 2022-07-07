@@ -8,15 +8,15 @@ You can check the source code and modify it to implement some cool stuff with LI
 
 ```bash
 # install dependencies
-$ yarn install
+$ npm install
 
 # serve with hot reload at localhost:3000
-$ yarn run dev
+$ npm run dev
 
 # build for production and launch server
-$ yarn run build
-$ yarn run start
+$ npm run build
+$ npm run start
 
 # generate static project
-$ yarn run generate
+$ npm run generate
 ```
