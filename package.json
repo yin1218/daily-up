@@ -1,11 +1,20 @@
 {
   "name": "liff-starter-nuxtjs",
   "version": "0.1.0",
+  "description": "A minimun app to demo how to integrate LIFF",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/line/line-liff-v2-starter"
+  },
+  "keywords": [
+    "LINE",
+    "LIFF"
+  ],
   "private": true,
   "scripts": {
     "dev": "nuxt -p 9000",
     "build": "nuxt build",
-    "start": "nuxt build & nuxt start",
+    "start": "nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -15,3 +24,4 @@
   },
   "devDependencies": {}
 }
+ 

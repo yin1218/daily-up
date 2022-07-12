@@ -42,4 +42,7 @@ export default {
   env: {
     LIFF_ID: process.env.LIFF_ID,
   },
+  server: {
+    port: process.env.PORT || 3000
+  }
 }
