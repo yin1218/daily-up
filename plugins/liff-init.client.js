@@ -16,7 +16,7 @@ export default (context, inject) => {
     })
     .catch(error => {
       console.log(`liff.init() failed: ${error}`);
-      if (!process.env.liffId) {
+      if (!process.env.LIFF_ID) {
         console.info('LIFF Starter: Please make sure that you provided `LIFF_ID` as an environmental variable.');
       }
       return Promise.reject(error);
