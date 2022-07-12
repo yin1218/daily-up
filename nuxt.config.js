@@ -43,6 +43,7 @@ export default {
     LIFF_ID: process.env.LIFF_ID,
   },
   server: {
+    host: '0.0.0.0',
     port: process.env.PORT || 3000
   }
 }
