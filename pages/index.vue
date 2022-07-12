@@ -7,6 +7,7 @@
         >LIFF Starter!</a
       >
     </h1>
+    <p>使用者姓名：{{displayName}}</p>
     <div class="home__badges">
       <span class="home__badges__badge badge--primary"> 每日推播 </span>
       <span class="home__badges__badge badge--secondary"> nuxtjs </span>
@@ -212,7 +213,8 @@ export default {
     return {
       version: packageJson.version,
       sdkVersion: "",
-      liffError: ""
+      liffError: "",
+      displayName: ""
     };
   },
   mounted() {
@@ -222,7 +224,15 @@ export default {
       .then(() => {
         //update needed data
         this.sdkVersion = liff.getVersion();
-        console.log(this.sdkVersion)
+        liff
+        .getProfile()
+        .then((profile) => {
+          this.displayName = profile.displayName;
+          console.log("this.displayName = ", this.displayName)
+        })
+        .catch((err) => {
+          console.log("error", err);
+        });
       })
       .catch((error) => {
         this.liffError = error;
