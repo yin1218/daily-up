@@ -8,6 +8,7 @@
       >
     </h1>
     <p>使用者姓名：{{displayName}}</p>
+    <p>系統語言：{{osLanguage}}</p>
     <div class="home__badges">
       <span class="home__badges__badge badge--primary"> 每日推播 </span>
       <span class="home__badges__badge badge--secondary"> nuxtjs </span>
@@ -21,6 +22,7 @@
         GitHub
       </a>
     </div>
+    
     <div class="home__buttons">
       <a
         href="https://developers.line.biz/en/docs/liff/developing-liff-apps/"
@@ -214,7 +216,8 @@ export default {
       version: packageJson.version,
       sdkVersion: "",
       liffError: "",
-      displayName: ""
+      displayName: "",
+      osLanguage: ""
     };
   },
   mounted() {
@@ -228,6 +231,7 @@ export default {
         .getProfile()
         .then((profile) => {
           this.displayName = profile.displayName;
+          this.osLanguage = liff.getLanguage();
           console.log("this.displayName = ", this.displayName)
         })
         .catch((err) => {
