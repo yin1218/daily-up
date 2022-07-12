@@ -1,14 +1,11 @@
 <template>
   <div class="home">
     <h1 class="home__title">
-      Welcome to <br /><a
-        class="home__title__link"
-        href="https://developers.line.biz/en/docs/liff/overview/"
-        >LIFF Starter!</a
-      >
+      所得稅計算機
     </h1>
     <p>使用者姓名：{{displayName}}</p>
-    <p>系統語言：{{osLanguage}}</p>
+    
+    <p>應繳稅額 = {{tax}}</p>
     <div class="home__badges">
       <span class="home__badges__badge badge--primary"> 每日推播 </span>
       <span class="home__badges__badge badge--secondary"> nuxtjs </span>
@@ -22,33 +19,9 @@
         GitHub
       </a>
     </div>
+    <p>月收入 = {{inputvalue}}</p>
+    <input type="range" min="1" max="100000" v-model:value="inputvalue"/>
     
-    <div class="home__buttons">
-      <a
-        href="https://developers.line.biz/en/docs/liff/developing-liff-apps/"
-        target="_blank"
-        rel="noreferrer"
-        class="home__buttons__button button--primary"
-      >
-        LIFF Documentation
-      </a>
-      <a
-        href="https://liff-playground.netlify.app/"
-        target="_blank"
-        rel="noreferrer"
-        class="home__buttons__button button--tertiary"
-      >
-        LIFF Playground
-      </a>
-      <a
-        href="https://developers.line.biz/console/"
-        target="_blank"
-        rel="noreferrer"
-        class="home__buttons__button button--secondary"
-      >
-        LINE Developers Console
-      </a>
-    </div>
   </div>
 </template>
 
@@ -210,6 +183,8 @@ body {
 
 <script>
 import packageJson from "../package.json";
+
+
 export default {
   data: function() {
     return {
@@ -217,8 +192,13 @@ export default {
       sdkVersion: "",
       liffError: "",
       displayName: "",
-      osLanguage: ""
+      inputvalue: "0"
     };
+  },
+  computed: {
+    tax(){
+      return Math.round(this.inputvalue * 0.1)
+    }
   },
   mounted() {
     // mounted() is rendered when DOM is rendered
