@@ -1,6 +1,6 @@
 export default {
   head: {
-    title: 'LIFF Starter',
+    title: '每日文章推播',
     htmlAttrs: {
       lang: 'en'
     },
