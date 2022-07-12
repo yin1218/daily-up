@@ -229,7 +229,7 @@ export default {
         this.sdkVersion = liff.getVersion();
         
         //get user name
-        this.userName = liff.getProfile();
+        // this.userName = liff.getProfile();
       })
       .catch((error) => {
         this.liffError = error;
