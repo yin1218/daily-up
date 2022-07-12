@@ -20,9 +20,6 @@
         GitHub
       </a>
     </div>
-    <div>
-      <h1>使用者姓名：{{ userName }}</h1>
-    </div>
     <div class="home__buttons">
       <a
         href="https://developers.line.biz/en/docs/liff/developing-liff-apps/"
@@ -209,15 +206,13 @@ body {
 </style>
 
 <script>
-import liff from "@line/liff/dist/lib";
 import packageJson from "../package.json";
 export default {
   data: function() {
     return {
       version: packageJson.version,
       sdkVersion: "",
-      liffError: "",
-      userName: ""
+      liffError: ""
     };
   },
   mounted() {
@@ -227,9 +222,7 @@ export default {
       .then(() => {
         //update needed data
         this.sdkVersion = liff.getVersion();
-        
-        //get user name
-        // this.userName = liff.getProfile();
+        console.log(this.sdkVersion)
       })
       .catch((error) => {
         this.liffError = error;
