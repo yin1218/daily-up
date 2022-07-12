@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <h1 class="home__title">
+  <div v-if="!isLogin">
+    <p>沒登入嗚嗚嗚</p>
+    <button>點這邊登入！</button>
+  </div>
+  <div v-if="isLogin">
+      <h1 class="home__title">
       所得稅計算機
     </h1>
     <p>使用者姓名：{{displayName}}</p>
@@ -23,6 +28,7 @@
     <input type="range" min="1" max="100000" v-model:value="inputvalue"/>
     <br>
     <input type="checkbox" v-model:value="isforeign">是否為外國人
+  </div>
   </div>
 </template>
 
@@ -194,7 +200,8 @@ export default {
       liffError: "",
       displayName: "",
       inputvalue: "0",
-      isforeign: false
+      isforeign: false,
+      isLogin: false
     };
   },
   computed: {
@@ -210,12 +217,11 @@ export default {
       .then(() => {
         //update needed data
         this.sdkVersion = liff.getVersion();
+        this.isLogin = liff.isLogin();
         liff
         .getProfile()
         .then((profile) => {
           this.displayName = profile.displayName;
-          this.osLanguage = liff.getLanguage();
-          console.log("this.displayName = ", this.displayName)
         })
         .catch((err) => {
           console.log("error", err);
