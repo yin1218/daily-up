@@ -21,7 +21,8 @@
     </div>
     <p>月收入 = {{inputvalue}}</p>
     <input type="range" min="1" max="100000" v-model:value="inputvalue"/>
-    
+    <br>
+    <input type="checkbox" v-model:value="isforeign">是否為外國人
   </div>
 </template>
 
@@ -192,12 +193,14 @@ export default {
       sdkVersion: "",
       liffError: "",
       displayName: "",
-      inputvalue: "0"
+      inputvalue: "0",
+      isforeign: false
     };
   },
   computed: {
     tax(){
-      return Math.round(this.inputvalue * 0.1)
+      const ratio = this.isforeign ? 0.1 : 0.2;
+      return Math.round(this.inputvalue * ratio)
     }
   },
   mounted() {
