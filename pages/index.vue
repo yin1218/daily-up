@@ -8,7 +8,7 @@
       >
     </h1>
     <div class="home__badges">
-      <span class="home__badges__badge badge--primary"> LIFF Starter </span>
+      <span class="home__badges__badge badge--primary"> 每日推播 </span>
       <span class="home__badges__badge badge--secondary"> nuxtjs </span>
       <span class="home__badges__badge badge--primary"> {{ version }} </span>
       <a
