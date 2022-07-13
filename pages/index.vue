@@ -4,7 +4,7 @@
     <p>沒登入嗚嗚嗚</p>
     <button>點這邊登入！</button>
   </div>
-  <div v-if="isLogin">
+  <div v-else>
       <h1 class="home__title">
       所得稅計算機
     </h1>
@@ -217,11 +217,12 @@ export default {
       .then(() => {
         //update needed data
         this.sdkVersion = liff.getVersion();
-        this.isLogin = liff.isLogin();
+        
         liff
         .getProfile()
         .then((profile) => {
           this.displayName = profile.displayName;
+          this.isLogin = liff.isLogin();
         })
         .catch((err) => {
           console.log("error", err);
