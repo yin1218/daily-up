@@ -215,7 +215,13 @@ export default {
     this.$liffInit
       .then(() => {        
         if(liff.isLoggedIn()){
-          this.displayName = liff.getProfile().displayName
+          liff.getProfile()
+          .then((profile) => {
+            this.displayName = profile.displayName;
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
         }
       })
       .catch((error) => {
