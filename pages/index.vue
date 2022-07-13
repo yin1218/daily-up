@@ -5,19 +5,6 @@
     </h1>
     
     <p>應繳稅額 = {{tax}}</p>
-    <div class="home__badges">
-      <span class="home__badges__badge badge--primary"> 每日推播 </span>
-      <span class="home__badges__badge badge--secondary"> nuxtjs </span>
-      <span class="home__badges__badge badge--primary"> {{ version }} </span>
-      <a
-        href="https://github.com/line/line-liff-v2-starter"
-        target="_blank"
-        rel="noreferrer"
-        class="home__badges__badge badge--secondary"
-      >
-        GitHub
-      </a>
-    </div>
     <p>月收入 = {{inputvalue}}</p>
     <input type="range" min="1" max="100000" v-model:value="inputvalue"/>
     <br>

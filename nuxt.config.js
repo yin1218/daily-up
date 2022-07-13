@@ -1,6 +1,6 @@
 export default {
   head: {
-    title: '每日文章推播',
+    title: '應繳稅計算機',
     htmlAttrs: {
       lang: 'en'
     },
