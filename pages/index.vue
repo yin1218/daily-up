@@ -1,14 +1,8 @@
 <template>
-  <div class="home">
-  <div v-if="!isLogin">
-    <p>沒登入嗚嗚嗚</p>
-    <button>點這邊登入！</button>
-  </div>
-  <div v-else>
+  <div class="home" v-if="isLogin">
       <h1 class="home__title">
       所得稅計算機
     </h1>
-    <p>使用者姓名：{{displayName}}</p>
     
     <p>應繳稅額 = {{tax}}</p>
     <div class="home__badges">
@@ -28,7 +22,6 @@
     <input type="range" min="1" max="100000" v-model:value="inputvalue"/>
     <br>
     <input type="checkbox" v-model:value="isforeign">是否為外國人
-  </div>
   </div>
 </template>
 
@@ -197,17 +190,11 @@ export default {
     return {
       version: packageJson.version,
       liffError: "",
-      displayName: "",
       inputvalue: "0",
       isforeign: false,
       isLogin: null
     };
   },
-  // watch: {
-  //   "isLogin" : function() {
-  //     console.log(this.isLogin);
-  //   }
-  // },
   computed: {
     tax(){
       const ratio = this.isforeign ? 0.1 : 0.2;
@@ -227,18 +214,6 @@ export default {
             console.log("你已經登入Line哦！");
         }
         this.isLogin = liff.isLoggedIn();
-        // console.log("here~")
-        // console.log("origin = ", this.isLogin);
-        // this.isLogin = liff.isLoggedin();
-        // console.log("new = ", this.isLogin);
-        // liff.getProfile()
-        // .then((profile) => {
-        //   this.displayName = profile.displayName;
-        //   this.isLogin = liff.isLoggedIn();
-        // })
-        // .catch((err) => {
-        //   console.log("error", err);
-        // });
       })
       .catch((error) => {
         this.liffError = error;
