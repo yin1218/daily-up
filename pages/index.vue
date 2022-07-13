@@ -200,9 +200,14 @@ export default {
       displayName: "",
       inputvalue: "0",
       isforeign: false,
-      isLogin: false
+      isLogin: null
     };
   },
+  // watch: {
+  //   "isLogin" : function() {
+  //     console.log(this.isLogin);
+  //   }
+  // },
   computed: {
     tax(){
       const ratio = this.isforeign ? 0.1 : 0.2;
@@ -213,16 +218,27 @@ export default {
     // mounted() is rendered when DOM is rendered
     // wait liff.init()
     this.$liffInit
-      .then(() => {        
-        if(liff.isLoggedIn()){
-          liff.getProfile()
-          .then((profile) => {
-            this.displayName = profile.displayName;
-          })
-          .catch((err) => {
-            console.log("error", err);
-          });
+      .then(() => { 
+        if (!liff.isLoggedIn()) {
+            console.log("你還沒登入Line哦！");
+            liff.login();
+            
+          } else {
+            console.log("你已經登入Line哦！");
         }
+        this.isLogin = liff.isLoggedIn();
+        // console.log("here~")
+        // console.log("origin = ", this.isLogin);
+        // this.isLogin = liff.isLoggedin();
+        // console.log("new = ", this.isLogin);
+        // liff.getProfile()
+        // .then((profile) => {
+        //   this.displayName = profile.displayName;
+        //   this.isLogin = liff.isLoggedIn();
+        // })
+        // .catch((err) => {
+        //   console.log("error", err);
+        // });
       })
       .catch((error) => {
         this.liffError = error;
