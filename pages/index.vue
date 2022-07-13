@@ -4,11 +4,11 @@
       所得稅計算機
     </h1>
     
-    <p>應繳稅額 = {{tax}}</p>
+    
     <p>月收入 = {{inputvalue}}</p>
     <input type="range" min="1" max="100000" v-model:value="inputvalue"/>
-    <br>
     <input type="checkbox" v-model:value="isforeign">是否為外國人
+    <h2>應繳稅額 = {{tax}}</h2>
   </div>
 </template>
 
@@ -200,7 +200,7 @@ export default {
           } else {
             console.log("你已經登入Line哦！");
         }
-        this.isLogin = liff.isLoggedIn();
+        this.isLogin = liff.isLoggedIn({ redirectUri: "https://daily-up.herokuapp.com" });
       })
       .catch((error) => {
         this.liffError = error;
