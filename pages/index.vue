@@ -222,7 +222,7 @@ export default {
         .getProfile()
         .then((profile) => {
           this.displayName = profile.displayName;
-          this.isLogin = liff.isLogin();
+          this.isLogin = true;
         })
         .catch((err) => {
           console.log("error", err);
