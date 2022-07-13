@@ -196,7 +196,6 @@ export default {
   data: function() {
     return {
       version: packageJson.version,
-      sdkVersion: "",
       liffError: "",
       displayName: "",
       inputvalue: "0",
@@ -214,19 +213,10 @@ export default {
     // mounted() is rendered when DOM is rendered
     // wait liff.init()
     this.$liffInit
-      .then(() => {
-        //update needed data
-        this.sdkVersion = liff.getVersion();
-        
-        liff
-        .getProfile()
-        .then((profile) => {
-          this.displayName = profile.displayName;
-          this.isLogin = true;
-        })
-        .catch((err) => {
-          console.log("error", err);
-        });
+      .then(() => {        
+        if(liff.isLoggedIn()){
+          this.displayName = liff.getProfile().displayName
+        }
       })
       .catch((error) => {
         this.liffError = error;
