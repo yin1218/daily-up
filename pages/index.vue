@@ -1,13 +1,11 @@
 <template>
   <div class="home" v-if="isLogin">
-      <h1 class="home__title">
+    <h1 class="home__title">
       所得稅計算機
     </h1>
-    
-    
+    <input type="checkbox" v-model:value="isforeign">是否為外國人
     <p>月收入 = {{inputvalue}}</p>
     <input type="range" min="1" max="100000" v-model:value="inputvalue"/>
-    <input type="checkbox" v-model:value="isforeign">是否為外國人
     <h2>應繳稅額 = {{tax}}</h2>
   </div>
 </template>
