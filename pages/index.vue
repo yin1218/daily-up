@@ -21,7 +21,7 @@
           </b-form-checkbox>
       </div>
       <div class="mb-3">
-        <label>標準列舉扣除額</label>
+        <label>標準扣除額</label>
         <b-input-group prepend="$">
             <b-form-input v-model="standard"></b-form-input>
         </b-input-group>
@@ -42,7 +42,7 @@
     <hr>
     <p>
       <b-icon icon="exclamation-circle-fill" variant="warning"></b-icon>
-      稅額計算方法： <br>(所得總額 – 免稅額 – 標準/列舉扣除額 – 特別扣除額 – 基本生活費) * 所得稅率
+      淨收入計算： <br>所得總額 – 免稅額 – 標準扣除額 – 特別扣除額 – 基本生活費
     </p>
     <h2>應繳稅額 = {{tax}}</h2>
     
