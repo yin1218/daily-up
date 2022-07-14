@@ -5,20 +5,20 @@
     </h1>
     <h2 class="home_subtitle">該年度個人薪資總額</h2>
     <p>{{salary}}</p>
-    <input type="range" min="1" max="10000000" v-model:value="salary"/>
+    <input type="range" min="0" max="10000000" v-model:value="salary"/>
     <h2 class="home_subtitle">免稅額</h2>
     <input type="checkbox" v-model:value="isSeven">是否有年滿70歲之納稅義務人、配偶及受納稅義務人扶養之直系尊親屬	
     <br>
     <input type="checkbox" v-model:value="isSingle">是否單身	
     <h2 class="home_subtitle">標準列舉扣除額</h2>
     <p>{{standard}}</p>
-    <input type="range" min="1" max="100000" v-model:value="standard"/>
+    <input type="range" min="0" max="100000" v-model:value="standard"/>
     <h2 class="home_subtitle">特別扣除額</h2>
     <p>{{special}}</p>
-    <input type="range" min="1" max="100000" v-model:value="special"/>
+    <input type="range" min="0" max="100000" v-model:value="special"/>
     <h2 class="home_subtitle">基本生活費</h2>
     <p>{{basic}}</p>
-    <input type="range" min="1" max="100000" v-model:value="basic"/>
+    <input type="range" min="0" max="100000" v-model:value="basic"/>
     <hr>
     <p>稅額計算方法： (所得總額 – 免稅額 – 標準/列舉扣除額 – 特別扣除額 – 基本生活費) * 所得稅率</p>
     <h2>應繳稅額 = {{tax}}</h2>
@@ -210,23 +210,12 @@ export default {
       const sevenFee = this.isSeven ? 88000 : 132000;
       const netIncome = this.salary - singleFee - sevenFee - this.standard - this.special - this.basic;
       let ratio = 0.0
-      switch (netIncome) {
-        case netIncome <= 540000:
-          ratio = 0.05
-          break;
-        case netIncome <= 1210000:
-          ratio = 0.12
-          break;
-        case netIncome <= 2420000:
-          ratio = 0.2
-          break;
-        case netIncome <=45300000:
-          ratio = 0.3
-          break;
-        default:
-          ratio = 0.4
-          break;
-      }
+      if(netIncome <= 540000) ratio = 0.05;
+      else if(netIncome <= 121000) ratio = 0.12;
+      else if(netIncome <= 2420000) ratio = 0.2;
+      else if(netIncome <= 4530000) ratio = 0.3;
+      else ratio = 0.4
+
       return Math.round(netIncome * ratio >= 0 ? netIncome * ratio : 0)
     }
   },
@@ -237,7 +226,7 @@ export default {
       .then(() => { 
         if (!liff.isLoggedIn()) {
             console.log("你還沒登入Line哦！");
-            liff.login();
+            liff.login({ redirectUri: "https://daily-up.herokuapp.com/" });
             
           } else {
             console.log("你已經登入Line哦！");
