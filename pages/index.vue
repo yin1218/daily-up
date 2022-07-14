@@ -3,9 +3,24 @@
     <h1 class="home__title">
       所得稅計算機
     </h1>
-    <input type="checkbox" v-model:value="isforeign">是否為外國人
-    <p>月收入 = {{inputvalue}}</p>
-    <input type="range" min="1" max="100000" v-model:value="inputvalue"/>
+    <h2 class="home_subtitle">該年度個人薪資總額</h2>
+    <p>{{salary}}</p>
+    <input type="range" min="1" max="10000000" v-model:value="salary"/>
+    <h2 class="home_subtitle">免稅額</h2>
+    <input type="checkbox" v-model:value="isSeven">是否有年滿70歲之納稅義務人、配偶及受納稅義務人扶養之直系尊親屬	
+    <br>
+    <input type="checkbox" v-model:value="isSingle">是否單身	
+    <h2 class="home_subtitle">標準列舉扣除額</h2>
+    <p>{{standard}}</p>
+    <input type="range" min="1" max="100000" v-model:value="standard"/>
+    <h2 class="home_subtitle">特別扣除額</h2>
+    <p>{{special}}</p>
+    <input type="range" min="1" max="100000" v-model:value="special"/>
+    <h2 class="home_subtitle">基本生活費</h2>
+    <p>{{basic}}</p>
+    <input type="range" min="1" max="100000" v-model:value="basic"/>
+    <hr>
+    <p>稅額計算方法： (所得總額 – 免稅額 – 標準/列舉扣除額 – 特別扣除額 – 基本生活費) * 所得稅率</p>
     <h2>應繳稅額 = {{tax}}</h2>
   </div>
 </template>
@@ -21,7 +36,7 @@ body {
 
 .home {
   padding: 5rem 2rem;
-  text-align: center;
+  text-align: left;
 }
 
 .home__title {
@@ -29,6 +44,10 @@ body {
   line-height: 1.15;
 }
 
+.home_subtitle {
+  font-size: 2rem;
+  line-height: 1.15;
+}
 .home__title__link {
   color: #06c755;
   text-decoration: none;
@@ -176,14 +195,39 @@ export default {
       version: packageJson.version,
       liffError: "",
       inputvalue: "0",
-      isforeign: false,
-      isLogin: null
+      isLogin: null,
+      salary: "0",
+      isSingle: false,
+      isSeven: false,
+      standard: "0",
+      special: "0",
+      basic: "0"
     };
   },
   computed: {
     tax(){
-      const ratio = this.isforeign ? 0.1 : 0.2;
-      return Math.round(this.inputvalue * ratio)
+      const singleFee = this.isSingle ? 240000 : 120000;
+      const sevenFee = this.isSeven ? 88000 : 132000;
+      const netIncome = this.salary - singleFee - sevenFee - this.standard - this.special - this.basic;
+      let ratio = 0.0
+      switch (netIncome) {
+        case netIncome <= 540000:
+          ratio = 0.05
+          break;
+        case netIncome <= 1210000:
+          ratio = 0.12
+          break;
+        case netIncome <= 2420000:
+          ratio = 0.2
+          break;
+        case netIncome <=45300000:
+          ratio = 0.3
+          break;
+        default:
+          ratio = 0.4
+          break;
+      }
+      return Math.round(netIncome * ratio >= 0 ? netIncome * ratio : 0)
     }
   },
   mounted() {
@@ -198,7 +242,7 @@ export default {
           } else {
             console.log("你已經登入Line哦！");
         }
-        this.isLogin = liff.isLoggedIn({ redirectUri: "https://daily-up.herokuapp.com" });
+        this.isLogin = liff.isLoggedIn();
       })
       .catch((error) => {
         this.liffError = error;
