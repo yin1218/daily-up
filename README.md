@@ -15,5 +15,4 @@ $ yarn dev
 
 # build for production and lausnch server
 $ yarn build
-$ yarn build
 ```
