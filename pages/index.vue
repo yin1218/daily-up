@@ -14,7 +14,7 @@
       <div class="mb-3">
         <label>免稅額: {{notax}}</label>
           <b-form-checkbox v-model="isSeven">
-            是否有年滿70歲之納稅義務人、配偶及受納稅義務人扶養之直系尊親屬	
+            是否已滿70歲，或有滿該歲數之配偶或直系尊親屬	
           </b-form-checkbox>
           <b-form-checkbox v-model="isSingle">
             是否單身
@@ -42,7 +42,7 @@
     <hr>
     <p>
       <b-icon icon="exclamation-circle-fill" variant="warning"></b-icon>
-      稅額計算方法： (所得總額 – 免稅額 – 標準/列舉扣除額 – 特別扣除額 – 基本生活費) * 所得稅率
+      稅額計算方法： <br>(所得總額 – 免稅額 – 標準/列舉扣除額 – 特別扣除額 – 基本生活費) * 所得稅率
     </p>
     <h2>應繳稅額 = {{tax}}</h2>
     
@@ -128,8 +128,8 @@ export default {
   },
   computed: {
     notax(){
-      const singleFee = this.isSingle ? 240000 : 120000;
-      const sevenFee = this.isSeven ? 88000 : 132000;
+      const singleFee = this.isSingle ? 120000 : 240000;
+      const sevenFee = this.isSeven ? 132000 : 88000;
       return singleFee + sevenFee
     },
     tax(){
