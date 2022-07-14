@@ -15,4 +15,8 @@ $ yarn dev
 
 # build for production and lausnch server
 $ yarn build
+$ yarn start
 ```
+
+## How to use this service
+Please visit https://liff.line.me/1657284121-GmwplZkj
